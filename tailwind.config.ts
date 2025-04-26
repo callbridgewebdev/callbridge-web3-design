@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				web3: {
+					purple: '#8B5CF6',
+					'dark-purple': '#6E59A5',
+					blue: '#0EA5E9',
+					dark: '#1A1F2C',
+					light: '#F1F0FB',
 				}
 			},
 			borderRadius: {
@@ -84,11 +92,32 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' }
+				},
+				'pulse-glow': {
+					'0%, 100%': { 
+						opacity: '1',
+						boxShadow: '0 0 20px 2px rgba(139, 92, 246, 0.3)'
+					},
+					'50%': { 
+						opacity: '0.8',
+						boxShadow: '0 0 30px 4px rgba(139, 92, 246, 0.5)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'float': 'float 6s ease-in-out infinite',
+				'pulse-glow': 'pulse-glow 3s ease-in-out infinite'
+			},
+			backgroundImage: {
+				'hero-pattern': 'linear-gradient(to right bottom, rgba(139, 92, 246, 0.8), rgba(110, 89, 165, 0.9)), url("/blockchain-bg.svg")',
+				'gradient-purple': 'linear-gradient(to right, #8B5CF6, #6E59A5)',
+				'gradient-radial': 'radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, rgba(14, 165, 233, 0.1) 100%)',
 			}
 		}
 	},
