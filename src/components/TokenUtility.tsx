@@ -1,7 +1,6 @@
-
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Coins, GanttChart, LineChart, Parachute, Percent, ArrowDownToLine, Users } from "lucide-react";
+import { Coins, GanttChart, LineChart, Gift, Percent, ArrowDownToLine, Users, RefreshCw } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const TokenUtility = () => {
@@ -9,7 +8,7 @@ const TokenUtility = () => {
     {
       title: "Airdrop",
       description: "Claim free $CWD tokens as rewards for early adopters and community members.",
-      icon: <Parachute className="h-6 w-6" />,
+      icon: <Gift className="h-6 w-6" />,
       href: "/airdrop",
       color: "bg-pink-100 text-pink-600 dark:bg-pink-900/20 dark:text-pink-400"
     },
@@ -30,7 +29,7 @@ const TokenUtility = () => {
     {
       title: "Swap",
       description: "Easily exchange $CWD tokens with other cryptocurrencies on our platform.",
-      icon: <Shuffle className="h-6 w-6" />,
+      icon: <RefreshCw className="h-6 w-6" />,
       href: "/swap",
       color: "bg-purple-100 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400"
     },
