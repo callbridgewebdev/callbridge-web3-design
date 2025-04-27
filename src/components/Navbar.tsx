@@ -1,8 +1,8 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { Menu, X, Wallet } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
+import WalletConnect from './WalletConnect';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,10 +66,7 @@ const Navbar = () => {
 
         {/* Connect Wallet Button */}
         <div className="hidden md:block">
-          <Button variant="default" className="wallet-button">
-            <Wallet className="w-4 h-4 mr-1" />
-            Connect Wallet
-          </Button>
+          <WalletConnect />
         </div>
 
         {/* Mobile Menu Button */}
@@ -100,10 +97,7 @@ const Navbar = () => {
               </Link>
             ))}
             <div className="pt-2">
-              <Button variant="default" className="wallet-button w-full">
-                <Wallet className="w-4 h-4 mr-1" />
-                Connect Wallet
-              </Button>
+              <WalletConnect />
             </div>
           </div>
         </div>

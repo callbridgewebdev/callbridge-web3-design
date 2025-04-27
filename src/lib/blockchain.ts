@@ -1,4 +1,3 @@
-
 import { TokenContractData } from "./types";
 
 // Smart contract configuration
@@ -19,8 +18,11 @@ export async function fetchTokenData(): Promise<TokenContractData> {
     // In production, this would be real data from the blockchain
     await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
     
+    const mockPrice = 0.25 + (Math.random() * 0.05 - 0.025);
+    
     return {
-      currentPrice: 0.25 + (Math.random() * 0.05 - 0.025), // Simulated price fluctuation
+      currentPrice: mockPrice,
+      currentPriceUSD: mockPrice * 350, // Simulated BNB/USD price of $350
       marketCap: 2500000 + (Math.random() * 100000 - 50000),
       volume24h: 150000 + (Math.random() * 20000 - 10000),
       circulatingSupply: 10000000,

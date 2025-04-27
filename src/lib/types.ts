@@ -1,4 +1,3 @@
-
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -8,6 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export interface TokenContractData {
   currentPrice: number;
+  currentPriceUSD: number;
   marketCap: number;
   volume24h: number;
   circulatingSupply: number;

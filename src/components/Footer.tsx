@@ -1,6 +1,6 @@
-
 import { Link } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
+import { Facebook, Twitter, Youtube, Telegram } from "lucide-react";
 
 const Footer = () => {
   const utilityLinks = [
@@ -45,17 +45,17 @@ const Footer = () => {
               Blockchain-powered web design services with native $CWD token on the Binance Smart Chain.
             </p>
             <div className="flex space-x-4">
+              <a href="https://facebook.com" className="text-muted-foreground hover:text-primary" aria-label="Facebook">
+                <Facebook className="w-5 h-5" />
+              </a>
               <a href="https://twitter.com" className="text-muted-foreground hover:text-primary" aria-label="Twitter">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+                <Twitter className="w-5 h-5" />
+              </a>
+              <a href="https://youtube.com" className="text-muted-foreground hover:text-primary" aria-label="Youtube">
+                <Youtube className="w-5 h-5" />
               </a>
               <a href="https://telegram.org" className="text-muted-foreground hover:text-primary" aria-label="Telegram">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M21.5 15a2.5 2.5 0 0 1-2.5 2.5H5a2.5 2.5 0 0 1-2.5-2.5V9a2.5 2.5 0 0 1 2.5-2.5h14a2.5 2.5 0 0 1 2.5 2.5v6Z"></path><path d="m3.5 9 9 6 9-6"></path><path d="m3.5 15 6.75-4.5"></path><path d="m21.5 15-6.75-4.5"></path></svg>
-              </a>
-              <a href="https://discord.com" className="text-muted-foreground hover:text-primary" aria-label="Discord">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><circle cx="9" cy="12" r="1"></circle><circle cx="15" cy="12" r="1"></circle><path d="M7.5 7.2c.7-.5 1.4-.7 2.2-.7h4.7c1 0 1.8.5 2.6 1a5 5 0 0 1 1.5 4.3 7.1 7.1 0 0 1-2 4.2c-3.7 3.4-9.5 1.7-13.3-1.4"></path><path d="M15.7 11.1c.4.5.4 1.2.2 1.8-.3.7-1 1.1-1.8 1.1H8.8c-1 0-1.7-.6-2-1.4a2 2 0 0 1 .5-2.2"></path><path d="M8.8 15.2h1.8c2.1 0 4-1.3 4.7-3.2.5-1.6.2-3.2-.7-4.5a5 5 0 0 0-4-2.1H8.8a4.3 4.3 0 0 0-4 2.6 4 4 0 0 0 .2 3.3 4 4 0 0 0 3.2 2.4"></path><path d="m7 16.8-.7 1.9a.2.2 0 0 0 .3.2l1.7-1.3"></path><path d="m16.8 16.8.7 1.9a.2.2 0 0 1-.3.2l-1.7-1.3"></path></svg>
-              </a>
-              <a href="https://medium.com" className="text-muted-foreground hover:text-primary" aria-label="Medium">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><rect width="18" height="18" x="3" y="3" rx="2"></rect><circle cx="9" cy="9" r="1"></circle><path d="M7 15h2"></path><path d="M15 7v2"></path><path d="M7 13h6"></path><path d="M15 11h2"></path><path d="M11 15h6"></path></svg>
+                <Telegram className="w-5 h-5" />
               </a>
             </div>
           </div>
