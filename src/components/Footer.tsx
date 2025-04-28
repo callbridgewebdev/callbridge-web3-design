@@ -1,6 +1,7 @@
+
 import { Link } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
-import { Facebook, Twitter, Youtube, Telegram } from "lucide-react";
+import { Facebook, Twitter, Youtube, MessageCircle } from "lucide-react";
 
 const Footer = () => {
   const utilityLinks = [
@@ -55,7 +56,7 @@ const Footer = () => {
                 <Youtube className="w-5 h-5" />
               </a>
               <a href="https://telegram.org" className="text-muted-foreground hover:text-primary" aria-label="Telegram">
-                <Telegram className="w-5 h-5" />
+                <MessageCircle className="w-5 h-5" />
               </a>
             </div>
           </div>

@@ -10,6 +10,14 @@ import { Button } from "@/components/ui/button";
 import { Wallet } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
+// Define types for ethereum and trustwallet on the window object
+declare global {
+  interface Window {
+    ethereum?: any;
+    trustwallet?: any;
+  }
+}
+
 const WalletConnect = () => {
   const [isOpen, setIsOpen] = useState(false);
 
