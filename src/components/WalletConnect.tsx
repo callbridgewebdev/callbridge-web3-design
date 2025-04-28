@@ -9,8 +9,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Wallet } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { connectWeb3Wallet, type Web3Connection } from '@/lib/web3';
 
-// Define types for ethereum and trustwallet on the window object
 declare global {
   interface Window {
     ethereum?: any;
@@ -20,42 +20,34 @@ declare global {
 
 const WalletConnect = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [walletData, setWalletData] = useState<Web3Connection | null>(null);
 
   const handleConnect = async (walletType: 'metamask' | 'trust') => {
-    try {
-      const provider = walletType === 'metamask' ? window.ethereum : window.trustwallet;
-      
-      if (!provider) {
-        toast({
-          title: `${walletType === 'metamask' ? 'MetaMask' : 'Trust Wallet'} not found`,
-          description: `Please install ${walletType === 'metamask' ? 'MetaMask' : 'Trust Wallet'} to continue`,
-          variant: "destructive",
-        });
-        return;
-      }
-
-      await provider.request({ method: 'eth_requestAccounts' });
+    const connection = await connectWeb3Wallet(walletType);
+    
+    if (connection) {
+      setWalletData(connection);
+      setIsOpen(false);
       
       toast({
         title: "Wallet Connected",
-        description: "Successfully connected to your wallet",
-      });
-      
-      setIsOpen(false);
-    } catch (error) {
-      toast({
-        title: "Connection Failed",
-        description: "Failed to connect to wallet. Please try again.",
-        variant: "destructive",
+        description: `Connected to ${walletType === 'metamask' ? 'MetaMask' : 'Trust Wallet'}`,
       });
     }
   };
 
   return (
     <>
-      <Button onClick={() => setIsOpen(true)} className="wallet-button">
+      <Button 
+        onClick={() => setIsOpen(true)} 
+        className="wallet-button"
+        variant={walletData ? "outline" : "default"}
+      >
         <Wallet className="w-4 h-4 mr-1" />
-        Connect Wallet
+        {walletData ? 
+          `${walletData.address.slice(0, 6)}...${walletData.address.slice(-4)} (${walletData.balance} ETH)` : 
+          'Connect Wallet'
+        }
       </Button>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
