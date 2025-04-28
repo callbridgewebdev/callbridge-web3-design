@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Pool, Water } from "lucide-react";
+import { Droplets, Waves } from "lucide-react";
 
 const PoolPage = () => {
   return (
@@ -25,7 +25,7 @@ const PoolPage = () => {
           <Card className="web3-card">
             <CardHeader>
               <div className="flex items-center gap-2 mb-2">
-                <Pool className="h-5 w-5 text-web3-purple" />
+                <Droplets className="h-5 w-5 text-web3-purple" />
                 <Badge variant="outline">Active Pools</Badge>
               </div>
               <CardTitle>Liquidity Pools</CardTitle>
@@ -83,7 +83,7 @@ const PoolPage = () => {
           <Card className="web3-card">
             <CardHeader>
               <div className="flex items-center gap-2 mb-2">
-                <Water className="h-5 w-5 text-web3-purple" />
+                <Waves className="h-5 w-5 text-web3-purple" />
                 <Badge variant="outline">Incentives</Badge>
               </div>
               <CardTitle>Liquidity Rewards</CardTitle>
