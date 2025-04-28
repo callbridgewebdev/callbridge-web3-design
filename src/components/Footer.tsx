@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
 import { Facebook, Twitter, Youtube, MessageCircle } from "lucide-react";
@@ -9,6 +8,7 @@ const Footer = () => {
     { name: "Presale", href: "/presale" },
     { name: "Staking", href: "/staking" },
     { name: "Swap", href: "/swap" },
+    { name: "Pool", href: "/pool" },
     { name: "DEX Chart", href: "/chart" },
     { name: "Documentation", href: "/docs" },
     { name: "Community", href: "/community" },

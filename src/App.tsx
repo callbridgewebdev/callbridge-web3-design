@@ -22,6 +22,7 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import PresaleTerms from "./pages/PresaleTerms";
 import CookiePolicy from "./pages/CookiePolicy";
+import Pool from "./pages/Pool";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +51,7 @@ const App = () => (
           <Route path="/terms" element={<Terms />} />
           <Route path="/presale-terms" element={<PresaleTerms />} />
           <Route path="/cookie-policy" element={<CookiePolicy />} />
+          <Route path="/pool" element={<Pool />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
