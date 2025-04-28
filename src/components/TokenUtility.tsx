@@ -1,6 +1,7 @@
+
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Coins, GanttChart, LineChart, Gift, Percent, ArrowDownToLine, Users, RefreshCw, link } from "lucide-react";
+import { Coins, GanttChart, LineChart, Gift, Percent, ArrowDownToLine, Users, RefreshCw, Pool } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const TokenUtility = () => {
@@ -66,7 +67,7 @@ const TokenUtility = () => {
         "Automated rewards distribution",
         "Incentivized liquidity mining"
       ],
-      icon: <link className="h-6 w-6" />,
+      icon: <Pool className="h-6 w-6" />,
       href: "/pool",
       color: "bg-indigo-100 text-indigo-600 dark:bg-indigo-900/20 dark:text-indigo-400"
     },
