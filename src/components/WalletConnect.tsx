@@ -5,6 +5,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Wallet } from "lucide-react";
@@ -18,7 +19,12 @@ declare global {
   }
 }
 
-const WalletConnect = () => {
+interface WalletConnectProps {
+  onConnected?: () => void;
+  customText?: string;
+}
+
+const WalletConnect = ({ onConnected, customText }: WalletConnectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [walletData, setWalletData] = useState<Web3Connection | null>(null);
 
@@ -33,27 +39,40 @@ const WalletConnect = () => {
         title: "Wallet Connected",
         description: `Connected to ${walletType === 'metamask' ? 'MetaMask' : 'Trust Wallet'}`,
       });
+      
+      // Call the onConnected callback if provided
+      if (onConnected) {
+        onConnected();
+      }
     }
   };
 
   return (
     <>
-      <Button 
-        onClick={() => setIsOpen(true)} 
-        className="wallet-button"
-        variant={walletData ? "outline" : "default"}
-      >
-        <Wallet className="w-4 h-4 mr-1" />
-        {walletData ? 
-          `${walletData.address.slice(0, 6)}...${walletData.address.slice(-4)} (${walletData.balance} ETH)` : 
-          'Connect Wallet'
-        }
-      </Button>
+      {walletData ? (
+        <Button 
+          onClick={onConnected} 
+          className="w-full"
+        >
+          {customText || "Continue"}
+        </Button>
+      ) : (
+        <Button 
+          onClick={() => setIsOpen(true)} 
+          className="wallet-button w-full"
+        >
+          <Wallet className="w-4 h-4 mr-2" />
+          Connect Wallet
+        </Button>
+      )}
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Connect Wallet</DialogTitle>
+            <DialogDescription>
+              Connect your wallet to interact with the blockchain.
+            </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <Button onClick={() => handleConnect('metamask')} className="w-full">
