@@ -20,7 +20,7 @@ export default function Presale() {
   const [estimatedTokens, setEstimatedTokens] = useState<number>(0);
   const [walletConnected, setWalletConnected] = useState(false);
 
-  // Fetch presale data from smart contract
+  // Fetch presale data from smart contract with real-time updates
   const { 
     data: presaleData, 
     isLoading: isLoadingPresaleData,
@@ -29,7 +29,9 @@ export default function Presale() {
   } = useQuery({
     queryKey: ['presaleData'],
     queryFn: fetchPresaleData,
-    refetchInterval: 30000, // Auto refetch every 30 seconds
+    refetchInterval: 15000, // Auto refetch every 15 seconds for real-time data
+    retry: 3,
+    retryDelay: attempt => Math.min(attempt > 1 ? 2 ** attempt * 1000 : 1000, 30 * 1000),
   });
 
   // Calculate time remaining
@@ -95,13 +97,12 @@ export default function Presale() {
       return;
     }
 
-    // In a real implementation, this would call the smart contract
     toast({
       title: "Purchase initiated",
       description: "Please confirm the transaction in your wallet",
     });
     
-    // Simulate delay for blockchain interaction
+    // Simulate blockchain transaction completion
     setTimeout(() => {
       toast({
         title: "Purchase successful!",
@@ -126,6 +127,13 @@ export default function Presale() {
             </p>
             {isLoadingPresaleData ? (
               <Skeleton className="h-8 w-64 mx-auto" />
+            ) : presaleDataError ? (
+              <div className="text-destructive text-sm">
+                Error loading presale data. Please try again.
+                <Button variant="outline" size="sm" className="ml-2" onClick={() => refetchPresaleData()}>
+                  Retry
+                </Button>
+              </div>
             ) : (
               <div className="inline-flex items-center gap-2 text-sm bg-muted/50 px-4 py-2 rounded-full">
                 <Timer className="h-4 w-4 text-primary" />
@@ -177,6 +185,11 @@ export default function Presale() {
                     <Skeleton className="h-2 w-full my-1" />
                     <Skeleton className="h-4 w-32 ml-auto" />
                   </>
+                ) : presaleDataError ? (
+                  <div className="text-center p-4">
+                    <p className="text-destructive mb-2">Failed to load presale data</p>
+                    <Button variant="outline" onClick={() => refetchPresaleData()}>Retry</Button>
+                  </div>
                 ) : (
                   <>
                     <div className="flex justify-between text-sm">
@@ -197,6 +210,13 @@ export default function Presale() {
                     <Skeleton className="h-24 w-full" />
                     <Skeleton className="h-24 w-full" />
                   </>
+                ) : presaleDataError ? (
+                  <div className="col-span-2 text-center">
+                    <Button variant="outline" onClick={() => refetchPresaleData()}>
+                      <RefreshCw className="mr-2 h-4 w-4" />
+                      Reload Data
+                    </Button>
+                  </div>
                 ) : (
                   <>
                     <div className="bg-muted/50 p-4 rounded-lg">
@@ -233,6 +253,10 @@ export default function Presale() {
                       <Skeleton className="h-4 w-16" />
                     </div>
                   </>
+                ) : presaleDataError ? (
+                  <div className="text-center py-2">
+                    <p className="text-sm text-muted-foreground">Price data unavailable</p>
+                  </div>
                 ) : (
                   <>
                     <div className="flex justify-between text-sm">
@@ -264,7 +288,7 @@ export default function Presale() {
                     min={presaleData?.minContribution || 0.1}
                     max={presaleData?.maxContribution || 10}
                     step="0.01"
-                    disabled={!presaleData?.isActive}
+                    disabled={!presaleData?.isActive || !!presaleDataError}
                   />
                 </div>
                 
