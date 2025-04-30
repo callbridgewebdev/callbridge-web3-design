@@ -32,9 +32,9 @@ export default function About() {
 
   const teamMembers = [
     {
-      name: "Alex Johnson",
-      role: "Founder & CEO",
-      bio: "With over 10 years in web development and 5 years in blockchain technology, Alex leads our vision and strategy.",
+      name: "Patrick John Peguit",
+      role: "Head, Web Designer",
+      bio: "Expertise in web design and development customization to improve website speed and boost visibility on Google Search Engine.",
       image: "/placeholder.svg",
       social: {
         twitter: "#",
@@ -43,9 +43,9 @@ export default function About() {
       }
     },
     {
-      name: "Sarah Chen",
-      role: "Chief Technology Officer",
-      bio: "Blockchain expert with experience at major Web3 companies. Sarah oversees our technical infrastructure and token development.",
+      name: "Juli Ann Estorgio",
+      role: "Web Designer / Content Writer",
+      bio: "Specialized in creating high-quality content and improving grammar to make your website branding more effective.",
       image: "/placeholder.svg",
       social: {
         twitter: "#",
@@ -54,9 +54,9 @@ export default function About() {
       }
     },
     {
-      name: "Michael Rodriguez",
-      role: "Creative Director",
-      bio: "Award-winning designer specializing in Web3 interfaces and user experiences for blockchain applications.",
+      name: "Neo Joseph Obendencio",
+      role: "Social Media Expert",
+      bio: "Experts in social media marketing through advertising and promotions to attract larger audiences and target sales customers.",
       image: "/placeholder.svg",
       social: {
         twitter: "#",
@@ -65,9 +65,9 @@ export default function About() {
       }
     },
     {
-      name: "Priya Patel",
-      role: "Head of Development",
-      bio: "Full-stack developer with expertise in React, smart contracts, and decentralized applications.",
+      name: "Maristel Bacla-an",
+      role: "Graphics Designer",
+      bio: "Specialized in enhancing the visual appeal of your website and optimizing its front-end layout, we can attract more customers.",
       image: "/placeholder.svg",
       social: {
         twitter: "#",
