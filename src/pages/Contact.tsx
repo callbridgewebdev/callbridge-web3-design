@@ -8,7 +8,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Mail, MessageSquare, Phone } from "lucide-react";
+import { Mail, MessageSquare, Phone, MapPin } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -40,18 +40,21 @@ export default function Contact() {
   const contactInfo = [
     {
       title: "Email",
-      value: "contact@callbridge.com",
+      value: "support@callbridgewebdesign.xyz",
+      secondValue: "callbridgewebdesign@gmail.com",
       icon: Mail,
     },
     {
       title: "Phone",
-      value: "+1 (555) 123-4567",
+      value: "(+639) 67 992 1816",
+      secondValue: "(+639) 97 879 4778",
       icon: Phone,
     },
     {
-      title: "Support Hours",
-      value: "24/7 Customer Support",
-      icon: MessageSquare,
+      title: "Address",
+      value: "Purok 4 Dasitam",
+      secondValue: "Baclayon Bohol 6301 PH",
+      icon: MapPin,
     },
   ];
 
@@ -78,6 +81,9 @@ export default function Contact() {
                           <h3 className="font-semibold">{info.title}</h3>
                         </div>
                         <p className="text-muted-foreground">{info.value}</p>
+                        {info.secondValue && (
+                          <p className="text-muted-foreground">{info.secondValue}</p>
+                        )}
                       </CardContent>
                     </Card>
                   ))}
