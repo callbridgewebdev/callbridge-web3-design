@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -23,6 +24,7 @@ import Terms from "./pages/Terms";
 import PresaleTerms from "./pages/PresaleTerms";
 import CookiePolicy from "./pages/CookiePolicy";
 import Pool from "./pages/Pool";
+import Packages from "./pages/Packages";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +41,7 @@ const App = () => (
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/packages" element={<Packages />} />
           <Route path="/quote" element={<Quote />} />
           <Route path="/airdrop" element={<Airdrop />} />
           <Route path="/presale" element={<Presale />} />
