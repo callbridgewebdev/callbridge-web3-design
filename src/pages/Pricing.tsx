@@ -2,7 +2,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Check } from "lucide-react";
+import { Check, Code, Shield, Blockchain, Layers, Diamond } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -10,52 +10,55 @@ import Footer from "@/components/Footer";
 export default function Pricing() {
   const plans = [
     {
-      name: "Basic",
-      description: "Perfect for simple web projects",
+      name: "Web3 Starter",
+      description: "Perfect for simple blockchain projects",
       price: "4,999",
       features: [
-        "Custom Web Design",
-        "Mobile Responsive",
-        "Basic SEO Setup",
-        "Contact Form",
+        "Custom dApp Design",
+        "Web3 Wallet Integration",
+        "Basic Smart Contract Setup",
+        "Token Dashboard",
         "5 Content Pages",
         "3 Months Support",
       ],
       discount: "5% discount with $CWD tokens",
       href: "/quote",
+      icon: <Code className="h-10 w-10 text-web3-purple" />,
     },
     {
-      name: "Professional",
-      description: "Ideal for growing businesses",
+      name: "DeFi Pro",
+      description: "Ideal for emerging DeFi projects",
       price: "9,999",
       features: [
-        "Everything in Basic",
-        "E-commerce Integration",
-        "Advanced SEO",
-        "Blog Setup",
-        "10 Content Pages",
+        "Everything in Starter",
+        "DEX/Swap Integration",
+        "Advanced Smart Contracts",
+        "Staking Functionality",
+        "Token Analytics Dashboard",
         "6 Months Support",
-        "Performance Optimization",
+        "Multi-chain Compatibility",
       ],
       discount: "10% discount with $CWD tokens",
       href: "/quote",
       popular: true,
+      icon: <Blockchain className="h-10 w-10 text-web3-purple" />,
     },
     {
-      name: "Enterprise",
-      description: "For large-scale applications",
+      name: "Enterprise Web3",
+      description: "Full-scale blockchain ecosystem",
       price: "19,999",
       features: [
-        "Everything in Professional",
-        "Custom Blockchain Integration",
-        "Smart Contract Development",
-        "Token Integration",
-        "Unlimited Pages",
+        "Everything in DeFi Pro",
+        "Custom Token Creation",
+        "DAO Governance System",
+        "NFT Marketplace",
+        "Cross-chain Bridging",
         "12 Months Support",
-        "Priority Support",
+        "Priority Development",
       ],
       discount: "15% discount with $CWD tokens",
       href: "/quote",
+      icon: <Diamond className="h-10 w-10 text-web3-purple" />,
     },
   ];
 
@@ -65,10 +68,10 @@ export default function Pricing() {
       <main className="flex-1 py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <Badge variant="outline" className="mb-4">Pricing</Badge>
-            <h1 className="text-4xl font-bold mb-4">Simple, Transparent Pricing</h1>
+            <Badge variant="outline" className="mb-4">Web3 Solutions</Badge>
+            <h1 className="text-4xl font-bold mb-4">Web3 Development Pricing</h1>
             <p className="text-muted-foreground">
-              Choose the perfect plan for your needs. Save more with $CWD token discounts.
+              Blockchain-powered solutions with exclusive discounts for $CWD token holders.
             </p>
           </div>
 
@@ -86,6 +89,9 @@ export default function Pricing() {
                   </div>
                 )}
                 <CardHeader>
+                  <div className="mb-4">
+                    {plan.icon}
+                  </div>
                   <CardTitle>{plan.name}</CardTitle>
                   <CardDescription>{plan.description}</CardDescription>
                   <div className="mt-4">
