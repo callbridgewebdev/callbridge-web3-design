@@ -2,7 +2,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Check, Code, Shield, Blockchain, Layers, Diamond } from "lucide-react";
+import { Check, Code, Shield, Cpu, Layers, Diamond } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -41,7 +41,7 @@ export default function Pricing() {
       discount: "10% discount with $CWD tokens",
       href: "/quote",
       popular: true,
-      icon: <Blockchain className="h-10 w-10 text-web3-purple" />,
+      icon: <Cpu className="h-10 w-10 text-web3-purple" />,
     },
     {
       name: "Enterprise Web3",
