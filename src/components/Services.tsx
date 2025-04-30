@@ -1,38 +1,38 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Code, Layout, PenTool, Shuffle, BarChart4, Wallet } from "lucide-react";
+import { AppWindow, Image, Smartphone, Server, Globe, BarChart4, TrendingUp, Headset } from "lucide-react";
 
 const Services = () => {
   const services = [
     {
-      title: "Web Design",
-      description: "Professional, responsive designs that represent your brand perfectly.",
-      icon: <Layout className="h-8 w-8 text-web3-purple" />
+      title: "Web Interface Application",
+      description: "We develop web applications customized to your business needs, ensuring a seamless user experience, better performance, and optimal functionality.",
+      icon: <AppWindow className="h-8 w-8 text-web3-purple" />
     },
     {
-      title: "Development",
-      description: "Clean code and powerful functionality, built with the latest technologies.",
-      icon: <Code className="h-8 w-8 text-web3-purple" />
+      title: "Graphics Interface Design",
+      description: "Using user-centric design principles, our skilled designers produce visually stunning user interfaces that provide better usability and overall satisfaction.",
+      icon: <Image className="h-8 w-8 text-web3-purple" />
     },
     {
-      title: "UI/UX Design",
-      description: "User-centered design that creates seamless, intuitive experiences.",
-      icon: <PenTool className="h-8 w-8 text-web3-purple" />
+      title: "Mobile Responsive Interface",
+      description: "By utilizing our responsive website interface for mobile devices, we deliver user-friendly experiences on iOS and Android devices that are optimized for multi-touch screens without the need for an app.",
+      icon: <Smartphone className="h-8 w-8 text-web3-purple" />
     },
     {
-      title: "Web3 Integration",
-      description: "Connect your site to blockchain technology and decentralized applications.",
-      icon: <Shuffle className="h-8 w-8 text-web3-purple" />
+      title: "Data Server & Domain Hosting",
+      description: "To ensure your online security, we offer secure hosting and domain registration services that are both reliable and safe.",
+      icon: <Server className="h-8 w-8 text-web3-purple" />
     },
     {
-      title: "Tokenized Payments",
-      description: "Accept payments in $CWD tokens with lower fees and faster processing.",
-      icon: <Wallet className="h-8 w-8 text-web3-purple" />
-    },
-    {
-      title: "Analytics",
-      description: "Comprehensive reporting and insights to optimize performance.",
+      title: "Digital Marketing Campaigns",
+      description: "Our strategic digital marketing campaigns drive targeted traffic, increase brand awareness, accelerate your website, and increase conversions through SEO, social media, and other platforms.",
       icon: <BarChart4 className="h-8 w-8 text-web3-purple" />
+    },
+    {
+      title: "Tech Support Consultancy",
+      description: "Our technical expertise can help you develop a digital business strategy, streamline your operations and stay ahead of the curve with current industry trends.",
+      icon: <Headset className="h-8 w-8 text-web3-purple" />
     }
   ];
 

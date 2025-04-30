@@ -9,7 +9,7 @@ import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const Index = () => {
   const navigate = useNavigate();
