@@ -9,11 +9,11 @@ import Footer from "@/components/Footer";
 export default function Portfolio() {
   const projects = [
     {
-      title: "DeFi Dashboard",
+      title: "DcashVault",
       category: "Web3",
-      description: "A comprehensive dashboard for DeFi protocol management with real-time data integration.",
-      image: "https://placehold.co/600x400",
-      link: "#",
+      description: "A secure vault system for ROI-based DeFi staking with referral rewards and token integration.",
+      image: "/assets/images/dcashvault.png",
+      link: "https://dcashvault.callbridgewebdesign.xyz",
     },
     {
       title: "NFT Marketplace",
