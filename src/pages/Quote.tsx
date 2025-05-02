@@ -8,9 +8,11 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Check } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -22,6 +24,8 @@ const formSchema = z.object({
 
 export default function Quote() {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -33,13 +37,56 @@ export default function Quote() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    toast({
-      title: "Quote Request Received",
-      description: "We'll get back to you within 24 hours.",
-      duration: 5000,
-    });
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      setIsSubmitting(true);
+      
+      // Format the quote message for email
+      const emailContent = {
+        name: values.name,
+        email: values.email,
+        message: `
+          Quote Request:
+          
+          Name: ${values.name}
+          Email: ${values.email}
+          ${values.company ? `Company: ${values.company}` : ''}
+          Budget Range: ${values.budget}
+          Project Description:
+          ${values.description}
+        `,
+      };
+      
+      // Call the Supabase Edge Function to send email
+      const { data, error } = await supabase.functions.invoke("send-contact", {
+        body: emailContent,
+      });
+
+      if (error) {
+        throw new Error(error.message || "Failed to send quote request");
+      }
+
+      // Show success toast
+      toast({
+        title: "Quote Request Received",
+        description: "We'll get back to you within 24 hours.",
+        duration: 5000,
+      });
+      
+      // Reset the form
+      form.reset();
+      
+    } catch (error: any) {
+      console.error("Error sending quote request:", error);
+      
+      toast({
+        title: "Error",
+        description: error.message || "Failed to send quote request. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -136,8 +183,22 @@ export default function Quote() {
                         </FormItem>
                       )}
                     />
-                    <Button type="submit" className="w-full" size="lg">
-                      <Check className="mr-2 h-4 w-4" /> Request Quote
+                    <Button 
+                      type="submit" 
+                      className="w-full" 
+                      size="lg"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Submitting...
+                        </>
+                      ) : (
+                        <>
+                          <Check className="mr-2 h-4 w-4" /> Request Quote
+                        </>
+                      )}
                     </Button>
                   </form>
                 </Form>
