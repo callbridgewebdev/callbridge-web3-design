@@ -71,8 +71,8 @@ export default function Contact() {
   const contactInfo = [
     {
       title: "Email",
-      value: "support@callbridgewebdesign.xyz",
-      secondValue: "callbridgewebdesign@gmail.com",
+      value: "@callbridgwebdesign",
+      secondValue: "support/gmail.com",
       icon: Mail,
     },
     {
