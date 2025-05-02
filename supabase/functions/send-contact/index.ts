@@ -2,7 +2,8 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "npm:resend@2.0.0";
 
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
+// Using hardcoded API key for Resend
+const resend = new Resend("re_123456789");
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -41,7 +42,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Send email to the business address
     const emailResponse = await resend.emails.send({
       from: "Contact Form <onboarding@resend.dev>",
-      to: ["support@callbridgewebdesign.xyz", "callbridgewebdesign@gmail.com"],
+      to: ["callbridgewebdesign@gmail.com"],
       reply_to: email,
       subject: `New Contact Form Message from ${name}`,
       html: `
