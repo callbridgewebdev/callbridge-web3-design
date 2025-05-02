@@ -109,7 +109,7 @@ const Footer = () => {
           </p>
           <div className="flex items-center">
             <img 
-              src="https://bscscan.com/images/brandassets/BscScan-logo-circle.png" 
+              src="https://cryptologos.cc/logos/bnb-bnb-logo.png" 
               alt="BSC Scan" 
               className="h-5 w-5 mr-2"
             />
