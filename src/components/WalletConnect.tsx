@@ -47,14 +47,24 @@ const WalletConnect = ({ onConnected, customText }: WalletConnectProps) => {
     }
   };
 
+  // Function to format the wallet address for display
+  const formatAddress = (address: string) => {
+    if (!address) return '';
+    return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
+  };
+
   return (
     <>
       {walletData ? (
         <Button 
           onClick={onConnected} 
           className="w-full"
+          variant="outline"
         >
-          {customText || "Continue"}
+          <span className="flex items-center">
+            <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+            {formatAddress(walletData.address)}
+          </span>
         </Button>
       ) : (
         <Button 
