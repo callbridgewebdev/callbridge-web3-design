@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Wallet } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { connectWeb3Wallet, type Web3Connection } from '@/lib/web3';
+import RegistrationForm from './RegistrationForm';
 
 declare global {
   interface Window {
@@ -27,6 +28,7 @@ interface WalletConnectProps {
 const WalletConnect = ({ onConnected, customText }: WalletConnectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [walletData, setWalletData] = useState<Web3Connection | null>(null);
+  const [showRegistration, setShowRegistration] = useState(false);
 
   const handleConnect = async (walletType: 'metamask' | 'trust') => {
     const connection = await connectWeb3Wallet(walletType);
@@ -40,6 +42,9 @@ const WalletConnect = ({ onConnected, customText }: WalletConnectProps) => {
         description: `Connected to ${walletType === 'metamask' ? 'MetaMask' : 'Trust Wallet'}`,
       });
       
+      // Show registration form after successful wallet connection
+      setShowRegistration(true);
+      
       // Call the onConnected callback if provided
       if (onConnected) {
         onConnected();
@@ -51,6 +56,10 @@ const WalletConnect = ({ onConnected, customText }: WalletConnectProps) => {
   const formatAddress = (address: string) => {
     if (!address) return '';
     return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
+  };
+
+  const handleRegistrationClose = () => {
+    setShowRegistration(false);
   };
 
   return (
@@ -94,6 +103,15 @@ const WalletConnect = ({ onConnected, customText }: WalletConnectProps) => {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Registration Form */}
+      {showRegistration && walletData && (
+        <RegistrationForm
+          isOpen={showRegistration}
+          onClose={handleRegistrationClose}
+          walletAddress={walletData.address}
+        />
+      )}
     </>
   );
 };

@@ -25,6 +25,7 @@ import PresaleTerms from "./pages/PresaleTerms";
 import CookiePolicy from "./pages/CookiePolicy";
 import Pool from "./pages/Pool";
 import Packages from "./pages/Packages";
+import Dashboard from "./pages/Dashboard";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +56,7 @@ const App = () => (
           <Route path="/presale-terms" element={<PresaleTerms />} />
           <Route path="/cookie-policy" element={<CookiePolicy />} />
           <Route path="/pool" element={<Pool />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
