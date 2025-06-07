@@ -13,7 +13,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
 import { Loader2, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -22,11 +21,10 @@ import { supabase } from "@/integrations/supabase/client";
 const formSchema = z.object({
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
-  company: z.string().optional(),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
   address: z.string().min(5, "Address must be at least 5 characters"),
-  businessType: z.string().min(2, "Business type is required"),
-  projectDescription: z.string().optional(),
+  telegram: z.string().optional(),
+  facebook: z.string().optional(),
 });
 
 interface RegistrationFormProps {
@@ -44,11 +42,10 @@ const RegistrationForm = ({ isOpen, onClose, walletAddress }: RegistrationFormPr
     defaultValues: {
       fullName: "",
       email: "",
-      company: "",
       phone: "",
       address: "",
-      businessType: "",
-      projectDescription: "",
+      telegram: "",
+      facebook: "",
     },
   });
 
@@ -56,14 +53,7 @@ const RegistrationForm = ({ isOpen, onClose, walletAddress }: RegistrationFormPr
     try {
       setIsSubmitting(true);
       
-      // Save registration data to Supabase (you may need to create a registration table)
-      const registrationData = {
-        ...values,
-        wallet_address: walletAddress,
-        registered_at: new Date().toISOString(),
-      };
-      
-      // For now, we'll just send it via the contact function
+      // Format the registration message for email
       const emailContent = {
         name: values.fullName,
         email: values.email,
@@ -72,15 +62,15 @@ const RegistrationForm = ({ isOpen, onClose, walletAddress }: RegistrationFormPr
           
           Full Name: ${values.fullName}
           Email: ${values.email}
-          Company: ${values.company || 'N/A'}
           Phone: ${values.phone}
           Address: ${values.address}
-          Business Type: ${values.businessType}
+          Telegram: ${values.telegram || 'N/A'}
+          Facebook: ${values.facebook || 'N/A'}
           Wallet Address: ${walletAddress}
-          Project Description: ${values.projectDescription || 'N/A'}
         `,
       };
       
+      // Call the Supabase Edge Function to send email
       const { error } = await supabase.functions.invoke("send-contact", {
         body: emailContent,
       });
@@ -91,16 +81,18 @@ const RegistrationForm = ({ isOpen, onClose, walletAddress }: RegistrationFormPr
 
       // Show success toast
       toast({
-        title: "Registration Successful!",
+        title: "Registration Completed Successfully!",
         description: "Welcome to Callbridge! Redirecting to your dashboard...",
         duration: 3000,
       });
       
-      // Close the form and redirect to dashboard
+      // Close the form
       onClose();
+      
+      // Wait a moment for the toast to show, then redirect
       setTimeout(() => {
         navigate('/dashboard');
-      }, 1000);
+      }, 1500);
       
     } catch (error: any) {
       console.error("Error submitting registration:", error);
@@ -130,63 +122,47 @@ const RegistrationForm = ({ isOpen, onClose, walletAddress }: RegistrationFormPr
         
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="fullName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Full Name *</FormLabel>
-                    <FormControl>
-                      <Input placeholder="John Doe" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email Address *</FormLabel>
-                    <FormControl>
-                      <Input type="email" placeholder="john@example.com" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+            <FormField
+              control={form.control}
+              name="fullName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Full Name *</FormLabel>
+                  <FormControl>
+                    <Input placeholder="John Doe" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="company"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Company Name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Your Company" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Phone Number *</FormLabel>
-                    <FormControl>
-                      <Input placeholder="+1 (555) 123-4567" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email Address *</FormLabel>
+                  <FormControl>
+                    <Input type="email" placeholder="john@example.com" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Phone Number *</FormLabel>
+                  <FormControl>
+                    <Input placeholder="+1 (555) 123-4567" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             
             <FormField
               control={form.control}
@@ -202,37 +178,35 @@ const RegistrationForm = ({ isOpen, onClose, walletAddress }: RegistrationFormPr
               )}
             />
             
-            <FormField
-              control={form.control}
-              name="businessType"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Business Type *</FormLabel>
-                  <FormControl>
-                    <Input placeholder="e.g., E-commerce, SaaS, Consulting" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            
-            <FormField
-              control={form.control}
-              name="projectDescription"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Project Description (Optional)</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Tell us about your project requirements..."
-                      className="min-h-[80px]"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="telegram"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Telegram (Optional)</FormLabel>
+                    <FormControl>
+                      <Input placeholder="@username" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              <FormField
+                control={form.control}
+                name="facebook"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Facebook (Optional)</FormLabel>
+                    <FormControl>
+                      <Input placeholder="facebook.com/username" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             
             <div className="bg-muted p-3 rounded-md">
               <p className="text-sm text-muted-foreground">
@@ -258,7 +232,7 @@ const RegistrationForm = ({ isOpen, onClose, walletAddress }: RegistrationFormPr
                 {isSubmitting ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Registering...
+                    Completing Registration...
                   </>
                 ) : (
                   "Complete Registration"
