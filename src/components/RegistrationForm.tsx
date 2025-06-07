@@ -16,7 +16,6 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { Loader2, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
 
 const formSchema = z.object({
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
@@ -53,46 +52,39 @@ const RegistrationForm = ({ isOpen, onClose, walletAddress }: RegistrationFormPr
     try {
       setIsSubmitting(true);
       
-      // Format the registration message for email
-      const emailContent = {
-        name: values.fullName,
-        email: values.email,
-        message: `
-          New User Registration:
-          
-          Full Name: ${values.fullName}
-          Email: ${values.email}
-          Phone: ${values.phone}
-          Address: ${values.address}
-          Telegram: ${values.telegram || 'N/A'}
-          Facebook: ${values.facebook || 'N/A'}
-          Wallet Address: ${walletAddress}
-        `,
-      };
-      
-      // Call the Supabase Edge Function to send email
-      const { error } = await supabase.functions.invoke("send-contact", {
-        body: emailContent,
+      console.log("Starting registration process...");
+      console.log("Registration data:", {
+        ...values,
+        walletAddress
       });
-
-      if (error) {
-        throw new Error(error.message || "Failed to submit registration");
+      
+      // Simulate API call with mockup data
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Simulate successful registration
+      const mockSuccess = true;
+      
+      if (mockSuccess) {
+        console.log("Registration completed successfully");
+        
+        // Show success toast
+        toast({
+          title: "Registration Completed Successfully!",
+          description: "Welcome to Callbridge! Redirecting to your dashboard...",
+          duration: 3000,
+        });
+        
+        // Close the form
+        onClose();
+        
+        // Wait a moment for the toast to show, then redirect
+        setTimeout(() => {
+          console.log("Redirecting to dashboard...");
+          navigate('/dashboard');
+        }, 1500);
+      } else {
+        throw new Error("Registration failed");
       }
-
-      // Show success toast
-      toast({
-        title: "Registration Completed Successfully!",
-        description: "Welcome to Callbridge! Redirecting to your dashboard...",
-        duration: 3000,
-      });
-      
-      // Close the form
-      onClose();
-      
-      // Wait a moment for the toast to show, then redirect
-      setTimeout(() => {
-        navigate('/dashboard');
-      }, 1500);
       
     } catch (error: any) {
       console.error("Error submitting registration:", error);
